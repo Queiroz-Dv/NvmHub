@@ -1,0 +1,97 @@
+﻿@page
+@model NvmManager.Web.Pages.Angular.IndexModel
+@{
+    ViewData["Title"] = "Angular Hub";
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="msg @(Model.Success ? "ok" : "bad")">
+        @Model.Message
+    </div>
+}
+
+@if (Model.AngularIncompatible && Model.SuggestedNodeVersion is not null)
+{
+    <div class="msg bad">
+        Angular CLI instalado, porém incompatível com o Node atual.
+        <br />
+        <span class="small">
+            Requer Node @Model.RequiredNodeVersion ou superior.
+        </span>
+        <br />
+        <form method="post" asp-page-handler="UpdateNode">
+            <input asp-for="SuggestedNodeVersion"  hidden="hidden" style="max-width:200px;"  />
+            <button class="btn">
+                Atualizar Node
+            </button>
+        </form>
+    </div> 
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.AngularVersion))
+{
+    <p class="small">
+        Angular CLI disponível: <strong>@Model.AngularVersion</strong>
+    </p>
+}
+
+<div style="display:flex; justify-content:space-between; align-items:center;">
+    <h1>Angular Hub</h1>
+
+    <span class="chip ok">
+        Node em uso: @Model.NodeVersion
+    </span>
+</div>
+
+<p class="muted">Gerencie versões do Angular CLI.</p>
+
+
+<fieldset class="card" style="max-width:900px; margin-bottom:16px;">
+    <legend><strong>Instalar Angular CLI</strong></legend>
+
+    <form method="post" asp-page-handler="Install">
+        <div class="row">
+            <input asp-for="AngularVersionToInstall"
+                   placeholder="Ex: 11.1.4"
+                   style="max-width:200px;" />
+
+            <button class="btn">Instalar</button>
+        </div>     
+    </form>
+
+</fieldset>
+
+<fieldset class="card" style="max-width:900px;">
+    <legend><strong>Angular CLI instalado</strong></legend>
+
+    @if (!string.IsNullOrEmpty(Model.AngularVersion))
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Versão</th>
+                    <th style="width:140px;">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="chip angular">
+                            Angular @Model.AngularVersion
+                        </span>
+                    </td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <button class="btn danger">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="muted">Nenhuma versão do Angular CLI instalada para a versão @Model.NodeVersion </p>
+    }
+</fieldset>

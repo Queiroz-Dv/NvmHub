@@ -1,0 +1,120 @@
+﻿@page
+@model NvmManager.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="msg @(Model.Success ? "ok" : "bad")">
+        @Model.Message
+    </div>
+}
+
+<h1>Dashboard</h1>
+<p class="muted">Visão geral do ambiente Node.js, Angular e NVM.</p>
+
+<div class="row">
+
+    <!-- ── NVM CARD ───────────────────────────────────────── -->
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <div class="dashboard-icon">🧰</div>
+            <h3 style="margin:0;">NVM</h3>
+        </div>
+
+        @if (Model.IsNvmInstalled)
+        {
+            <span class="chip ok">Instalado @Model.NvmVersion</span>
+        }
+        else
+        {
+            <span class="chip bad">Não encontrado</span>
+        }
+
+        <div class="hr"></div>
+
+        <a class="btn secondary" href="/Nvm/Install">
+            Gerenciar NVM
+        </a>
+    </div>
+
+    <!-- ── NODE + ANGULAR CARD ───────────────────────────── -->
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <div class="dashboard-icon">🟢</div>
+            <h3 style="margin:0;">Node.js & Angular</h3>
+        </div>
+
+        @if (!Model.IsNvmInstalled)
+        {
+            <span class="chip">Node: —</span>
+            <p class="small muted">
+                Instale o NVM para gerenciar versões do Node.js.
+            </p>
+        }
+        else if (Model.CurrentNodeVersion is null)
+        {
+            <span class="chip">Node: —</span>
+            <p class="small muted">
+                Nenhuma versão ativa do Node.js.
+            </p>
+        }
+        else
+        {
+            <p class="small muted">Ambiente ativo</p>
+
+            <span class="chip ok">
+                Node @Model.CurrentNodeVersion
+            </span>
+
+            @if (!string.IsNullOrEmpty(Model.AngularVersion))
+            {
+                <span class="chip angular" style="margin-left:6px;">
+                    Angular @Model.AngularVersion
+                </span>
+            }
+            else
+            {
+                <span class="chip" style="margin-left:6px;">
+                    Angular não instalado
+                </span>
+            }
+        }
+
+        <div class="hr"></div>
+
+        <a class="btn secondary" href="/Node/Versions">
+            Gerenciar versões
+        </a>
+    </div>
+
+    <!-- ── AMBIENTE ESTÁVEL CARD ─────────────────────────── -->
+    <div class="dashboard-card">
+        <div class="dashboard-card-header">
+            <div class="dashboard-icon">⚙️</div>
+            <h3 style="margin:0;">Ambiente Estável (LTS)</h3>
+        </div>
+
+        <p class="small">
+            Instala automaticamente as versões mais recentes e estáveis do
+            <strong>Node.js</strong> e do <strong>Angular CLI</strong>.
+        </p>
+
+        <p class="small muted">
+            Ideal para estudos, testes e novos projetos.
+            Para produção, utilize versões específicas conforme o projeto.
+        </p>
+
+        <form method="post" asp-page-handler="InstallStableNode">
+            <button class="btn">Instalar Node.js estável</button>
+        </form>
+
+        <div style="height:10px;"></div>
+
+        <form method="post" asp-page-handler="InstallStableAngular">
+            <button class="btn secondary">Instalar Angular CLI estável</button>
+        </form>
+    </div>
+
+</div>

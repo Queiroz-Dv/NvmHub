@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<UseWindowsForms>true</UseWindowsForms>
+
+		<ApplicationIcon>wwwroot\fav.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Core\NvmManager.Core.csproj" />
+	</ItemGroup>
+
+</Project>

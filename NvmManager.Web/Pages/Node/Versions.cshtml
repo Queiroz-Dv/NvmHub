@@ -1,0 +1,126 @@
+﻿@page
+@model NvmManager.Web.Pages.Node.VersionsModel
+@{
+    ViewData["Title"] = "Gerenciar versões";
+}
+
+<h1>Gerenciar versões do Node.js</h1>
+<p class="muted">Instale, ative ou remova versões do Node.js.</p>
+
+@if (!string.IsNullOrWhiteSpace(Model.Message))
+{
+    <div class="msg @(Model.Success ? "ok" : "bad")" style="margin:12px 0;">
+        <strong>@(Model.Success ? "Info:" : "Erro:")</strong> @Model.Message
+    </div>
+}
+
+<!-- INSTALAÇÃO -->
+<fieldset class="card" style="max-width:900px; margin-bottom:16px;">
+    <legend><strong>Instalar nova versão</strong></legend>
+
+    <form method="post" asp-page-handler="Install">
+        <div class="row">
+             <input asp-for="Version"
+                   inputmode="numeric"
+                   pattern="\d+\.\d+\.\d+"
+                   style="max-width:200px;"
+                   disabled="@(Model.IsInstalling ? "disabled" : null)" />
+
+            <button class="btn"
+                    type="submit"
+                    @(Model.IsInstalling ? "disabled" : "")>
+                @(Model.IsInstalling ? "Instalando..." : "Instalar")
+            </button>
+        </div>
+
+        <p class="small">
+            Versão sugerida para compatibilidade: <strong>12.11.0</strong>
+        </p>
+    </form>
+</fieldset>
+
+<!-- GERENCIAMENTO -->
+<fieldset class="card" style="max-width:900px;">
+    <legend><strong>Versões instaladas</strong></legend>
+
+    <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+        <form method="post" asp-page-handler="Refresh">
+            <button class="btn secondary" type="submit">Atualizar</button>
+        </form>
+    </div>
+
+    @if (Model.Versions.Count == 0)
+    {
+        <p class="muted">Nenhuma versão instalada.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Versão</th>
+                    <th>Status</th>
+                    <th style="width:180px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model.Versions)
+                {
+                    <tr>
+                        <td><code>@v.DisplayVersion</code></td>
+                        <td>
+                            @if (v.IsActive)
+                            {
+                                <span class="badge active">ATIVA</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!v.IsActive)
+                            {
+                                <form method="post" asp-page-handler="Use" style="display:inline;">
+                                    <input type="hidden" name="version" value="@v.Version" />
+                                    <button class="btn">Ativar</button>
+                                </form>
+                            }
+
+                            <form method="post" asp-page-handler="AskRemove"
+                                style="display:inline;">
+                                <input type="hidden" name="version" value="@v.Version" />
+                                <button class="btn danger">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</fieldset>
+
+@if (Model.PendingRemovalVersion is not null)
+{
+    <div class="modal-backdrop">
+        <div class="modal">
+            <h3>Remover versão</h3>
+
+            <p>
+                Tem certeza que deseja remover a versão
+                <strong>@Model.PendingRemovalVersion</strong>?
+            </p>
+
+            <p class="small muted">
+                Essa ação não pode ser desfeita.
+            </p>
+
+            <div class="row" style="justify-content:flex-end;">
+                <form method="post" asp-page-handler="CancelRemove">
+                    <button class="btn secondary">Cancelar</button>
+                </form>
+
+                <form method="post" asp-page-handler="ConfirmRemove">
+                    <input type="hidden" name="version" value="@Model.PendingRemovalVersion" />
+                    <button class="btn danger">Remover</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

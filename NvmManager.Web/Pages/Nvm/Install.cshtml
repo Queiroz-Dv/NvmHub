@@ -1,0 +1,28 @@
+﻿@page
+@model NvmManager.Web.Pages.Nvm.InstallModel
+@{
+    ViewData["Title"] = "Instalar NVM";
+}
+
+<h1>Instalar NVM</h1>
+<p class="muted">Baixa e executa o instalador mais recente do NVM for Windows.</p>
+
+@if (Model.Message is not null)
+{
+    <div class="msg @(Model.Success ? "ok" : "bad")" style="margin:12px 0;">
+        <strong>@(Model.Success ? "Sucesso:" : "Erro:")</strong> @Model.Message
+        @if (!string.IsNullOrWhiteSpace(Model.Output))
+        {
+            <div class="hr"></div>
+            <pre style="white-space:pre-wrap; margin:0;">@Model.Output</pre>
+        }
+    </div>
+}
+
+<div class="card" style="max-width:720px;">
+    <form method="post">
+        <button class="btn" type="submit">Instalar / Atualizar NVM</button>
+    </form>
+    <div class="hr"></div>
+    <p class="small">Observação: pode exigir permissões elevadas dependendo do ambiente.</p>
+</div>

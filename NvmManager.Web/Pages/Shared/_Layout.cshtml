@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <title>@ViewData["Title"] - NVM Manager</title>
+</head>
+<body>
+    <div class="shell">
+        <aside class="nav">
+            <div class="brand">NVM Manager</div>
+
+            <a href="/">
+                <span class="nav-icon">🧰</span>
+                Dashboard
+            </a>
+
+            <div class="hr"></div>
+
+            <a href="/Node/Versions">
+                <span class="nav-icon">🟢</span>
+                Node Hub
+            </a>
+
+            <div class="hr"></div>
+
+            <a href="/Angular/Index">
+                <span class="nav-icon">🅰️</span>
+                Angular Hub
+            </a>
+
+            <div class="hr"></div>
+
+            <div class="small muted">
+                Ambiente local • WebView2
+            </div>
+        </aside>
+
+        <main class="main">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+</html>
