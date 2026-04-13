@@ -1,4 +1,4 @@
-namespace Core.Domain.Entities;
+namespace NvmManager.Web.Core.Domain.Entities;
 
 /// <summary>
 /// Representa uma versão do Node.js gerenciada pelo NVM.

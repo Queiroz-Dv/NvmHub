@@ -1,8 +1,7 @@
-using Core.Application.Services;
-using Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using NvmManager.Core.Application.Services;
+using NvmManager.Web.Core.Application.Services;
+using NvmManager.Web.Core.Domain.Entities;
 
 namespace NvmManager.Web.Pages.Node
 {

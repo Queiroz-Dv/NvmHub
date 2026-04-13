@@ -1,6 +1,6 @@
-using Core.Domain.Entities;
+using NvmManager.Web.Core.Domain.Entities;
 
-namespace Core.Infrastructure;
+namespace NvmManager.Web.Core.Infrastructure;
 
 /// <summary>
 /// Cache em memória para o estado das versões do Node.js.
@@ -15,21 +15,21 @@ public sealed class VersionStateCache
 {
     // ── Versão ativa ──────────────────────────────────────────────────────────
     private string? _currentVersion;
-    private bool    _currentLoaded;
+    private bool _currentLoaded;
 
-    public bool    HasCurrentVersion => _currentLoaded;
-    public string? CurrentVersion    => _currentVersion;
+    public bool HasCurrentVersion => _currentLoaded;
+    public string? CurrentVersion => _currentVersion;
 
     public void SetCurrentVersion(string? version)
     {
         _currentVersion = version;
-        _currentLoaded  = true;
+        _currentLoaded = true;
     }
 
     public void InvalidateCurrent()
     {
         _currentVersion = null;
-        _currentLoaded  = false;
+        _currentLoaded = false;
     }
 
     // ── Lista de versões instaladas ───────────────────────────────────────────

@@ -1,8 +1,8 @@
-using Core.Domain.Entities;
-using Core.Domain.Interfaces;
-using Core.Domain.Results;
+using NvmManager.Web.Core.Domain.Entities;
+using NvmManager.Web.Core.Domain.Interfaces;
+using NvmManager.Web.Core.Domain.Results;
 
-namespace Core.Application.Services;
+namespace NvmManager.Web.Core.Application.Services;
 
 /// <summary>
 /// Camada de aplicação: orquestra os use-cases do NVM com validações e cache.

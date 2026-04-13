@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Text;
-using Core.Domain.Interfaces;
+using NvmManager.Web.Core.Domain.Interfaces;
 
-namespace Core.Infrastructure;
+namespace NvmManager.Web.Core.Infrastructure;
 
 /// <summary>
 /// Executa processos do sistema operacional de forma assíncrona,

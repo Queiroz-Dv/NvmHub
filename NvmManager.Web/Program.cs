@@ -1,8 +1,6 @@
-using Core.Application.Services;
-using Core.Domain.Interfaces;
-using Core.Infrastructure;
-using NvmManager.Core.Application.Services;
-using NvmManager.Core.Infrastructure;
+using NvmManager.Web.Core.Application.Services;
+using NvmManager.Web.Core.Domain.Interfaces;
+using NvmManager.Web.Core.Infrastructure;
 
 namespace NvmManager.Web
 {

@@ -1,19 +1,16 @@
-using System.Net.Http;
-using System.Net.Http.Json;
+using NvmManager.Web.Core.Domain.Interfaces;
+using NvmManager.Web.Core.Domain.Results;
 using System.Text.Json;
-using Core.Domain.Interfaces;
-using Core.Domain.Results;
-using Core.Infrastructure;
 
-namespace Core.Infrastructure;
+namespace NvmManager.Web.Core.Infrastructure;
 
 /// <summary>
 /// Faz o download e instalação do NVM for Windows a partir do GitHub Releases.
 /// </summary>
 public sealed class NvmWindowsInstaller : INvmInstaller
 {
-    private const string GitHubApiUrl    = "https://api.github.com/repos/coreybutler/nvm-windows/releases/latest";
-    private const string SetupAssetName  = "nvm-setup.exe";
+    private const string GitHubApiUrl = "https://api.github.com/repos/coreybutler/nvm-windows/releases/latest";
+    private const string SetupAssetName = "nvm-setup.exe";
 
     private readonly HttpClient _httpClient;
 
@@ -78,7 +75,7 @@ public sealed class NvmWindowsInstaller : INvmInstaller
             var tempPath = Path.Combine(Path.GetTempPath(), SetupAssetName);
 
             using (var downloadStream = await _httpClient.GetStreamAsync(downloadUrl, ct))
-            using (var fileStream    = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
+            using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 await downloadStream.CopyToAsync(fileStream, ct);
             }

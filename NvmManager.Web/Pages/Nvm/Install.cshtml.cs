@@ -1,6 +1,6 @@
-using Core.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NvmManager.Web.Core.Application.Services;
 
 namespace NvmManager.Web.Pages.Nvm
 {

@@ -1,4 +1,4 @@
-namespace Core.Domain.Results
+namespace NvmManager.Web.Core.Domain.Results
 {
     /// <summary>
     /// Encapsula o resultado de uma operação, seguindo o padrão Result.

@@ -1,8 +1,8 @@
-﻿using Core.Domain.Interfaces;
-using Core.Domain.Results;
+﻿using NvmManager.Web.Core.Domain.Interfaces;
+using NvmManager.Web.Core.Domain.Results;
 using System.Text.Json;
 
-namespace NvmManager.Core.Infrastructure
+namespace NvmManager.Web.Core.Infrastructure
 {
     public sealed class AngularCommandExecutor
     {

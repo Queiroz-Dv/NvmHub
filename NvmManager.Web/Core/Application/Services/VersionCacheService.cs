@@ -1,4 +1,4 @@
-namespace Core.Application.Services;
+namespace NvmManager.Web.Core.Application.Services;
 
 /// <summary>
 /// Cache em memória para a versão do Node.js atualmente ativa.

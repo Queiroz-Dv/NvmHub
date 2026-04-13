@@ -1,8 +1,7 @@
-﻿using Core.Application.Services;
-using Core.Domain.Results;
-using NvmManager.Core.Infrastructure;
+﻿using NvmManager.Web.Core.Domain.Results;
+using NvmManager.Web.Core.Infrastructure;
 
-namespace NvmManager.Core.Application.Services
+namespace NvmManager.Web.Core.Application.Services
 {
     public sealed class AngularApplicationService
     {

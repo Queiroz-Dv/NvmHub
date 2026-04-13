@@ -1,7 +1,7 @@
-using Core.Domain.Entities;
-using Core.Domain.Results;
+using NvmManager.Web.Core.Domain.Entities;
+using NvmManager.Web.Core.Domain.Results;
 
-namespace Core.Domain.Interfaces;
+namespace NvmManager.Web.Core.Domain.Interfaces;
 
 /// <summary>
 /// Contrato para execução de comandos NVM.

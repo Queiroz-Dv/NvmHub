@@ -1,9 +1,9 @@
-using Core.Domain.Entities;
-using Core.Domain.Interfaces;
-using Core.Domain.Results;
+using NvmManager.Web.Core.Domain.Entities;
+using NvmManager.Web.Core.Domain.Interfaces;
+using NvmManager.Web.Core.Domain.Results;
 using System.Text.RegularExpressions;
 
-namespace Core.Infrastructure;
+namespace NvmManager.Web.Core.Infrastructure;
 
 /// <summary>
 /// Implementa <see cref="INvmService"/> delegando ao executável nvm.exe do NVM for Windows.
